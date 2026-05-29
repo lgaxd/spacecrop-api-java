@@ -22,13 +22,18 @@ public class SetorPlantioService {
 
     public Page<SetorPlantioResponseDTO> listarPorFazenda(Long fazendaId, String cultura, Pageable pageable) {
         return setorPlantioRepository.findByFazendaIdWithFilters(fazendaId, cultura, pageable)
-            .map(this::toResponseDTO);
+                .map(this::toResponseDTO);
     }
 
     public SetorPlantioResponseDTO buscarPorId(Long id, Long fazendaId) {
         SetorPlantio setor = setorPlantioRepository.findByIdAndFazendaId(id, fazendaId)
-            .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado"));
         return toResponseDTO(setor);
+    }
+
+    public SetorPlantio buscarEntidadePorId(Long id) {
+        return setorPlantioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado com ID: " + id));
     }
 
     @Transactional
@@ -40,11 +45,11 @@ public class SetorPlantioService {
         }
 
         SetorPlantio setor = SetorPlantio.builder()
-            .nome(request.getNome())
-            .cultura(request.getCultura())
-            .areaHectares(request.getAreaHectares())
-            .fazenda(fazenda)
-            .build();
+                .nome(request.getNome())
+                .cultura(request.getCultura())
+                .areaHectares(request.getAreaHectares())
+                .fazenda(fazenda)
+                .build();
 
         setor = setorPlantioRepository.save(setor);
         return toResponseDTO(setor);
@@ -53,7 +58,7 @@ public class SetorPlantioService {
     @Transactional
     public SetorPlantioResponseDTO atualizar(Long id, SetorPlantioRequestDTO request, Long usuarioId) {
         SetorPlantio setor = setorPlantioRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado com ID: " + id));
 
         if (!setor.getFazenda().getUsuario().getId().equals(usuarioId)) {
             throw new BusinessException("Você não tem permissão para editar este setor");
@@ -70,7 +75,7 @@ public class SetorPlantioService {
     @Transactional
     public void deletar(Long id, Long usuarioId) {
         SetorPlantio setor = setorPlantioRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado com ID: " + id));
 
         if (!setor.getFazenda().getUsuario().getId().equals(usuarioId)) {
             throw new BusinessException("Você não tem permissão para deletar este setor");
@@ -81,11 +86,11 @@ public class SetorPlantioService {
 
     private SetorPlantioResponseDTO toResponseDTO(SetorPlantio setor) {
         return SetorPlantioResponseDTO.builder()
-            .id(setor.getId())
-            .nome(setor.getNome())
-            .cultura(setor.getCultura())
-            .areaHectares(setor.getAreaHectares())
-            .fazendaId(setor.getFazenda().getId())
-            .build();
+                .id(setor.getId())
+                .nome(setor.getNome())
+                .cultura(setor.getCultura())
+                .areaHectares(setor.getAreaHectares())
+                .fazendaId(setor.getFazenda().getId())
+                .build();
     }
 }

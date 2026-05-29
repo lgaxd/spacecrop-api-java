@@ -34,6 +34,17 @@ public class UsuarioService {
         return toResponseDTO(usuario);
     }
 
+    // MÉTODO ADICIONADO PARA USO NO AlertaService e FazendaService
+    public Usuario buscarEntidadePorId(Long id) {
+        return usuarioRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com ID: " + id));
+    }
+
+    public Usuario buscarEntidadePorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com email: " + email));
+    }
+
     @Transactional
     @CacheEvict(value = "usuarios", key = "#id")
     public UsuarioResponseDTO atualizar(Long id, UsuarioUpdateRequestDTO request) {
@@ -65,11 +76,6 @@ public class UsuarioService {
             throw new ResourceNotFoundException("Usuário não encontrado com ID: " + id);
         }
         usuarioRepository.deleteById(id);
-    }
-
-    public Usuario buscarEntidadePorId(Long id) {
-        return usuarioRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com ID: " + id));
     }
 
     private UsuarioResponseDTO toResponseDTO(Usuario usuario) {

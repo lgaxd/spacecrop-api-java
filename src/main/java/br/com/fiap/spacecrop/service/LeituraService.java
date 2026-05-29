@@ -39,6 +39,11 @@ public class LeituraService {
         return toResponseDTO(leitura);
     }
 
+    public LeituraSatelite buscarEntidadePorId(Long id) {
+        return leituraRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Leitura não encontrada com ID: " + id));
+    }
+
     public List<LeituraResponseDTO> listarUltimasPorFazenda(Long fazendaId) {
         return leituraRepository.findTop10ByFazendaIdOrderByDataLeituraDesc(fazendaId)
             .stream().map(this::toResponseDTO).toList();
@@ -67,6 +72,7 @@ public class LeituraService {
         leitura.setSetor(setor);
         leitura.setValor(request.getValor());
         leitura.setAnomalia("N");
+        leitura.setDataLeitura(LocalDateTime.now());
 
         leitura = leituraRepository.save(leitura);
         return toResponseDTO(leitura);

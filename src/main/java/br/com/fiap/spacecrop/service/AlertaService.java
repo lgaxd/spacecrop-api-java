@@ -15,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class AlertaService {
@@ -24,7 +22,6 @@ public class AlertaService {
     private final AlertaRepository alertaRepository;
     private final AcaoAlertaRepository acaoAlertaRepository;
     private final UsuarioService usuarioService;
-    private final LeituraService leituraService;
 
     public Page<AlertaResponseDTO> listarPorFazenda(Long fazendaId, Pageable pageable) {
         return alertaRepository.findByLeituraFazendaId(fazendaId, pageable)
@@ -54,7 +51,6 @@ public class AlertaService {
         Usuario usuario = usuarioService.buscarEntidadePorId(usuarioId);
 
         alerta.setResolvido("S");
-        alerta.setDataResolucao(LocalDateTime.now());
 
         AcaoAlerta acao = new AcaoAlerta();
         acao.setAlerta(alerta);
@@ -73,7 +69,6 @@ public class AlertaService {
             .idTipoAlerta(alerta.getIdTipoAlerta())
             .resolvido(alerta.getResolvido())
             .dataAlerta(alerta.getDataAlerta())
-            .dataResolucao(alerta.getDataResolucao())
             .leituraId(alerta.getLeitura().getId())
             .valorLeitura(alerta.getLeitura().getValor())
             .fazendaId(alerta.getLeitura().getFazenda().getId())

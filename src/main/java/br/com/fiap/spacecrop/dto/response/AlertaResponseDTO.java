@@ -16,7 +16,6 @@ public class AlertaResponseDTO {
     private Long idTipoAlerta;
     private String resolvido;
     private LocalDateTime dataAlerta;
-    private LocalDateTime dataResolucao;
     private Long leituraId;
     private Double valorLeitura;
     private Long fazendaId;
