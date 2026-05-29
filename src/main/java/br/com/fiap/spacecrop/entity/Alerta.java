@@ -40,7 +40,7 @@ public class Alerta {
     private Usuario usuario;
 
     @Column(name = "fl_resolvido", nullable = false, length = 1)
-    private String resolvido;
+    private Character resolvido;
 
     @Column(name = "dt_alerta", nullable = false)
     private LocalDateTime dataAlerta;

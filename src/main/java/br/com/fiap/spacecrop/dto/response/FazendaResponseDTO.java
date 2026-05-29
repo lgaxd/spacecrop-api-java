@@ -14,6 +14,6 @@ public class FazendaResponseDTO {
     private String nome;
     private String cidade;
     private String estado;
-    private Double areaHectares;
+    private Float areaHectares;
     private Long usuarioId;
 }

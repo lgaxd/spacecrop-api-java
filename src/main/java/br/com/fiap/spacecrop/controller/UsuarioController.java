@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +26,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Listar usuários", description = "Retorna lista paginada de usuários (apenas ADMIN)")
+    @Operation(summary = "Listar usuários", description = "Retorna lista paginada de usuários")
     public ResponseEntity<Page<UsuarioResponseDTO>> listarUsuarios(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String email,
@@ -44,8 +42,7 @@ public class UsuarioController {
         
         UsuarioResponseDTO usuario = usuarioService.buscarPorId(id);
         
-        if (!userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")) &&
-            !usuario.getEmail().equals(userDetails.getUsername())) {
+        if (!usuario.getEmail().equals(userDetails.getUsername())) {
             throw new org.springframework.security.access.AccessDeniedException("Acesso negado");
         }
         
@@ -61,8 +58,7 @@ public class UsuarioController {
         
         UsuarioResponseDTO usuario = usuarioService.buscarPorId(id);
         
-        if (!userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")) &&
-            !usuario.getEmail().equals(userDetails.getUsername())) {
+        if (!usuario.getEmail().equals(userDetails.getUsername())) {
             throw new org.springframework.security.access.AccessDeniedException("Acesso negado");
         }
         
@@ -70,8 +66,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Deletar usuário", description = "Remove um usuário do sistema (apenas ADMIN)")
+    @Operation(summary = "Deletar usuário", description = "Remove um usuário do sistema")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         usuarioService.deletar(id);
         return ResponseEntity.noContent().build();

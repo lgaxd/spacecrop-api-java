@@ -41,7 +41,7 @@ public class Fazenda {
     private String estado;
 
     @Column(name = "nr_area_hectares", nullable = false)
-    private Double areaHectares;
+    private Float areaHectares;
 
     @JsonIgnore
     @Builder.Default

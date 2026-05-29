@@ -44,13 +44,13 @@ public class AlertaService {
         Alerta alerta = alertaRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Alerta não encontrado com ID: " + id));
 
-        if ("S".equals(alerta.getResolvido())) {
+        if ((char) 'S' == alerta.getResolvido()) {
             throw new BusinessException("Este alerta já foi resolvido");
         }
 
         Usuario usuario = usuarioService.buscarEntidadePorId(usuarioId);
 
-        alerta.setResolvido("S");
+        alerta.setResolvido((char) 'S');
 
         AcaoAlerta acao = new AcaoAlerta();
         acao.setAlerta(alerta);
@@ -67,7 +67,7 @@ public class AlertaService {
         return AlertaResponseDTO.builder()
             .id(alerta.getId())
             .idTipoAlerta(alerta.getIdTipoAlerta())
-            .resolvido(alerta.getResolvido())
+            .resolvido(alerta.getResolvido().toString())
             .dataAlerta(alerta.getDataAlerta())
             .leituraId(alerta.getLeitura().getId())
             .valorLeitura(alerta.getLeitura().getValor())
