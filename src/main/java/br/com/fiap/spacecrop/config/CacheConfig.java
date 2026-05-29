@@ -13,6 +13,6 @@ public class CacheConfig {
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
-                "satelites", "sensores", "fazendas", "usuarios");
+                "satelites", "sensores", "fazendas", "usuarios", "sensores_list", "satelites_list");
     }
 }

@@ -37,7 +37,7 @@ public class SensorOrbital {
     @Column(name = "nm_sensor", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "fl_ativo", nullable = false, length = 1)
+    @Column(name = "fl_ativo", nullable = false, columnDefinition = "CHAR(1)")
     private String ativo;
 
     @JsonIgnore

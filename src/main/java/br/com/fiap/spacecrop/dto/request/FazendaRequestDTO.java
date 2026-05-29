@@ -27,5 +27,5 @@ public class FazendaRequestDTO {
 
     @NotNull(message = "Área em hectares é obrigatória")
     @Positive(message = "Área deve ser maior que zero")
-    private Float areaHectares;
+    private Double areaHectares;
 }

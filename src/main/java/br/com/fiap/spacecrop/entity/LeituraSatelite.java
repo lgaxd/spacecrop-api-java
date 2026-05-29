@@ -36,13 +36,13 @@ public class LeituraSatelite {
     @JoinColumn(name = "id_setor")
     private SetorPlantio setor;
 
-    @Column(name = "nr_valor", nullable = false)
+    @Column(name = "nr_valor", nullable = false, columnDefinition = "NUMBER(8,2)")
     private Double valor;
 
     @Column(name = "dt_leitura", nullable = false)
     private LocalDateTime dataLeitura;
 
-    @Column(name = "fl_anomalia", nullable = false, length = 1)
+    @Column(name = "fl_anomalia", nullable = false, columnDefinition = "CHAR(1)")
     private String anomalia;
 
     @JsonIgnore

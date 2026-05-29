@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,11 +41,6 @@ public class LeituraService {
     public LeituraSatelite buscarEntidadePorId(Long id) {
         return leituraRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Leitura não encontrada com ID: " + id));
-    }
-
-    public List<LeituraResponseDTO> listarUltimasPorFazenda(Long fazendaId) {
-        return leituraRepository.findTop10ByFazendaIdOrderByDataLeituraDesc(fazendaId)
-            .stream().map(this::toResponseDTO).toList();
     }
 
     @Transactional

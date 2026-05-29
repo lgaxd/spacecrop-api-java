@@ -131,12 +131,6 @@ public class FazendaController {
         return ResponseEntity.ok(leituraService.listarPorFazenda(fazendaId, dataInicio, dataFim, anomalia, pageable));
     }
 
-    @GetMapping("/{fazendaId}/leituras/ultimas")
-    @Operation(summary = "Últimas 10 leituras da fazenda")
-    public ResponseEntity<java.util.List<LeituraResponseDTO>> listarUltimasLeituras(@PathVariable Long fazendaId) {
-        return ResponseEntity.ok(leituraService.listarUltimasPorFazenda(fazendaId));
-    }
-
     @GetMapping("/{fazendaId}/alertas")
     @Operation(summary = "Listar alertas da fazenda")
     public ResponseEntity<Page<AlertaResponseDTO>> listarAlertas(

@@ -37,7 +37,7 @@ public class SetorPlantio {
     @Column(name = "ds_cultura", nullable = false, length = 100)
     private String cultura;
 
-    @Column(name = "nr_area_hectares", nullable = false)
+    @Column(name = "nr_area_hectares", nullable = false, columnDefinition = "NUMBER(10,2)")
     private Double areaHectares;
     
     @JsonIgnore
