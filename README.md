@@ -45,7 +45,7 @@ A API segue uma arquitetura em camadas bem definida:
 Controller → Service → Repository → Entity (Oracle DB)
 ```
  
-Cada camada tem responsabilidade única, com comunicação via DTOs (Records Java) entre Controller e Service, garantindo separação entre a representação externa e o modelo de dados interno.
+Cada camada tem responsabilidade única, com comunicação via DTOs entre Controller e Service, garantindo separação entre a representação externa e o modelo de dados interno.
  
 ```
 src/main/java/br/com/fiap/spacecrop/
@@ -105,7 +105,7 @@ Satelite
 ### 1. Clone o repositório
  
 ```bash
-git clone https://github.com/<seu-usuario>/spacecrop-api-java.git
+git clone https://github.com/lgaxd/spacecrop-api-java.git
 cd spacecrop-api-java
 ```
  
@@ -190,6 +190,7 @@ curl -X POST http://localhost:8080/auth/login \
 | Método | Endpoint | Descrição |
 |---|---|---|
 | GET | `/fazendas` | Listar fazendas do usuário autenticado |
+| GET | `/fazendas/todas` | Listar todas as fazendas |
 | GET | `/fazendas/{id}` | Buscar fazenda por ID |
 | POST | `/fazendas` | Cadastrar fazenda |
 | PUT | `/fazendas/{id}` | Atualizar fazenda |
@@ -302,33 +303,7 @@ A API retorna respostas padronizadas para todos os erros:
 - **Cache** — Entidades frequentes cacheadas em memória (satélites, sensores, usuários, fazendas)
 - **Validação** — Todas as entradas são validadas com Bean Validation antes de processar
 - **Autorização por recurso** — Usuários só acessam e modificam seus próprios dados
----
- 
-## 📁 Estrutura do Projeto
- 
-```
-spacecrop-api-java/
-├── src/
-│   ├── main/
-│   │   ├── java/br/com/fiap/spacecrop/
-│   │   │   ├── config/              # JWT, Security, CORS, Swagger, Cache
-│   │   │   ├── controller/          # 8 controllers REST
-│   │   │   ├── dto/
-│   │   │   │   ├── request/         # 7 DTOs de entrada
-│   │   │   │   └── response/        # 9 DTOs de saída
-│   │   │   ├── entity/              # 8 entidades JPA
-│   │   │   ├── exception/           # Handler global + exceções customizadas
-│   │   │   ├── repository/          # 8 repositórios JPA
-│   │   │   └── service/             # 9 serviços de negócio
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/
-│       └── java/br/com/fiap/spacecrop/
-│           └── SpacecropApplicationTests.java
-├── pom.xml
-└── README.md
-```
- 
+
 ---
 
 *Desenvolvido como parte da Global Solution 2026/1 — FIAP*
