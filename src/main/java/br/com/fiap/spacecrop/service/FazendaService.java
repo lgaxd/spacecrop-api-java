@@ -24,13 +24,18 @@ public class FazendaService {
 
     public Page<FazendaResponseDTO> listarPorUsuario(Long usuarioId, String nome, Pageable pageable) {
         return fazendaRepository.findByUsuarioIdWithFilters(usuarioId, nome, pageable)
-            .map(this::toResponseDTO);
+                .map(this::toResponseDTO);
+    }
+
+    public Page<FazendaResponseDTO> listarTodas(String nome, String estado, Pageable pageable) {
+        return fazendaRepository.findAllWithFilters(nome, estado, pageable)
+                .map(this::toResponseDTO);
     }
 
     @Cacheable(value = "fazendas", key = "#id")
     public FazendaResponseDTO buscarPorId(Long id) {
         Fazenda fazenda = fazendaRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
         return toResponseDTO(fazenda);
     }
 
@@ -39,12 +44,12 @@ public class FazendaService {
         Usuario usuario = usuarioService.buscarEntidadePorId(usuarioId);
 
         Fazenda fazenda = Fazenda.builder()
-            .nome(request.getNome())
-            .cidade(request.getCidade())
-            .estado(request.getEstado())
-            .areaHectares(request.getAreaHectares())
-            .usuario(usuario)
-            .build();
+                .nome(request.getNome())
+                .cidade(request.getCidade())
+                .estado(request.getEstado())
+                .areaHectares(request.getAreaHectares())
+                .usuario(usuario)
+                .build();
 
         fazenda = fazendaRepository.save(fazenda);
         return toResponseDTO(fazenda);
@@ -54,7 +59,7 @@ public class FazendaService {
     @CacheEvict(value = "fazendas", key = "#id")
     public FazendaResponseDTO atualizar(Long id, FazendaRequestDTO request, Long usuarioId) {
         Fazenda fazenda = fazendaRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
 
         if (!fazenda.getUsuario().getId().equals(usuarioId)) {
             throw new BusinessException("Você não tem permissão para editar esta fazenda");
@@ -73,7 +78,7 @@ public class FazendaService {
     @CacheEvict(value = "fazendas", key = "#id")
     public void deletar(Long id, Long usuarioId) {
         Fazenda fazenda = fazendaRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
 
         if (!fazenda.getUsuario().getId().equals(usuarioId)) {
             throw new BusinessException("Você não tem permissão para deletar esta fazenda");
@@ -84,17 +89,17 @@ public class FazendaService {
 
     public Fazenda buscarEntidadePorId(Long id) {
         return fazendaRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada com ID: " + id));
     }
 
     private FazendaResponseDTO toResponseDTO(Fazenda fazenda) {
         return FazendaResponseDTO.builder()
-            .id(fazenda.getId())
-            .nome(fazenda.getNome())
-            .cidade(fazenda.getCidade())
-            .estado(fazenda.getEstado())
-            .areaHectares(fazenda.getAreaHectares())
-            .usuarioId(fazenda.getUsuario().getId())
-            .build();
+                .id(fazenda.getId())
+                .nome(fazenda.getNome())
+                .cidade(fazenda.getCidade())
+                .estado(fazenda.getEstado())
+                .areaHectares(fazenda.getAreaHectares())
+                .usuarioId(fazenda.getUsuario().getId())
+                .build();
     }
 }

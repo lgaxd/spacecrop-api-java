@@ -48,14 +48,24 @@ public class FazendaController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar fazendas", description = "Retorna todas as fazendas do usuário logado")
+    @Operation(summary = "Listar fazendas do usuário", description = "Retorna todas as fazendas do usuário logado")
     public ResponseEntity<Page<FazendaResponseDTO>> listarFazendas(
             @RequestParam(required = false) String nome,
             @AuthenticationPrincipal UserDetails userDetails,
             @PageableDefault(size = 10, sort = "id") Pageable pageable) {
-        
+
         Long usuarioId = getUsuarioId(userDetails);
         return ResponseEntity.ok(fazendaService.listarPorUsuario(usuarioId, nome, pageable));
+    }
+
+    @GetMapping("/todas")
+    @Operation(summary = "Listar todas as fazendas", description = "Retorna todas as fazendas do sistema (requer autenticação)")
+    public ResponseEntity<Page<FazendaResponseDTO>> listarTodasFazendas(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String estado,
+            @PageableDefault(size = 10, sort = "id") Pageable pageable) {
+
+        return ResponseEntity.ok(fazendaService.listarTodas(nome, estado, pageable));
     }
 
     @GetMapping("/{id}")
@@ -69,7 +79,7 @@ public class FazendaController {
     public ResponseEntity<FazendaResponseDTO> criar(
             @Valid @RequestBody FazendaRequestDTO request,
             @AuthenticationPrincipal UserDetails userDetails) {
-        
+
         Long usuarioId = getUsuarioId(userDetails);
         FazendaResponseDTO fazenda = fazendaService.criar(request, usuarioId);
         return ResponseEntity.status(HttpStatus.CREATED).body(fazenda);
@@ -81,7 +91,7 @@ public class FazendaController {
             @PathVariable Long id,
             @Valid @RequestBody FazendaRequestDTO request,
             @AuthenticationPrincipal UserDetails userDetails) {
-        
+
         Long usuarioId = getUsuarioId(userDetails);
         return ResponseEntity.ok(fazendaService.atualizar(id, request, usuarioId));
     }
@@ -91,7 +101,7 @@ public class FazendaController {
     public ResponseEntity<Void> deletar(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails) {
-        
+
         Long usuarioId = getUsuarioId(userDetails);
         fazendaService.deletar(id, usuarioId);
         return ResponseEntity.noContent().build();
@@ -103,7 +113,7 @@ public class FazendaController {
             @PathVariable Long fazendaId,
             @RequestParam(required = false) String cultura,
             @PageableDefault(size = 10, sort = "id") Pageable pageable) {
-        
+
         return ResponseEntity.ok(setorPlantioService.listarPorFazenda(fazendaId, cultura, pageable));
     }
 
@@ -113,7 +123,7 @@ public class FazendaController {
             @PathVariable Long fazendaId,
             @Valid @RequestBody SetorPlantioRequestDTO request,
             @AuthenticationPrincipal UserDetails userDetails) {
-        
+
         Long usuarioId = getUsuarioId(userDetails);
         SetorPlantioResponseDTO setor = setorPlantioService.criar(request, fazendaId, usuarioId);
         return ResponseEntity.status(HttpStatus.CREATED).body(setor);
@@ -127,7 +137,7 @@ public class FazendaController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFim,
             @RequestParam(required = false) String anomalia,
             @PageableDefault(size = 10, sort = "dataLeitura,desc") Pageable pageable) {
-        
+
         return ResponseEntity.ok(leituraService.listarPorFazenda(fazendaId, dataInicio, dataFim, anomalia, pageable));
     }
 
@@ -136,7 +146,7 @@ public class FazendaController {
     public ResponseEntity<Page<AlertaResponseDTO>> listarAlertas(
             @PathVariable Long fazendaId,
             @PageableDefault(size = 10, sort = "dataAlerta,desc") Pageable pageable) {
-        
+
         return ResponseEntity.ok(alertaService.listarPorFazenda(fazendaId, pageable));
     }
 }
