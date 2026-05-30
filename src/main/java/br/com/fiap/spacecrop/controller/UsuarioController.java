@@ -42,10 +42,6 @@ public class UsuarioController {
         
         UsuarioResponseDTO usuario = usuarioService.buscarPorId(id);
         
-        if (!usuario.getEmail().equals(userDetails.getUsername())) {
-            throw new org.springframework.security.access.AccessDeniedException("Acesso negado");
-        }
-        
         return ResponseEntity.ok(usuario);
     }
 

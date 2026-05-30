@@ -1,0 +1,954 @@
+{
+  "info": {
+    "name": "SpaceCrop API",
+    "description": "Collection completa para testes da SpaceCrop API — Global Solution 2026/1 FIAP.\n\n**Como usar:**\n1. Importe esta collection no Postman\n2. Crie um Environment com a variável `baseUrl` = `http://localhost:8080`\n3. Execute **Auth > Register** para criar sua conta\n4. Execute **Auth > Login** — o token JWT será salvo automaticamente na variável `token`\n5. Todos os demais requests já usam `{{token}}` no header Authorization",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "fazendaId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "setorId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "sateliteId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "sensorId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "leituraId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "alertaId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('token', json.token);",
+                  "    pm.collectionVariables.set('usuarioId', json.id);",
+                  "    console.log('Token salvo:', json.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Lucas Grillo\",\n  \"email\": \"lucas@spacecrop.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            },
+            "description": "Cadastra um novo usuário. O token JWT retornado é salvo automaticamente na variável `token`."
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('token', json.token);",
+                  "    pm.collectionVariables.set('usuarioId', json.id);",
+                  "    console.log('Login OK. Token salvo.');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"lucas@spacecrop.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Autentica o usuário e salva o JWT em `{{token}}`."
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            },
+            "description": "Realiza logout (stateless — invalida sessão no lado do cliente)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "👤 Usuários",
+      "item": [
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios?page=0&size=10&sort=id",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios"],
+              "query": [
+                { "key": "nome", "value": "", "disabled": true },
+                { "key": "email", "value": "", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "id" }
+              ]
+            },
+            "description": "Lista todos os usuários paginados. Filtros opcionais: `nome`, `email`."
+          }
+        },
+        {
+          "name": "Buscar Usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios", "{{usuarioId}}"]
+            },
+            "description": "Retorna os dados do usuário autenticado. Só é possível buscar o próprio usuário."
+          }
+        },
+        {
+          "name": "Atualizar Usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Lucas Grillo Alcântara\",\n  \"email\": \"lucas.novo@spacecrop.com\",\n  \"senha\": \"novaSenha456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios", "{{usuarioId}}"]
+            },
+            "description": "Atualiza nome, email e/ou senha. Todos os campos são opcionais."
+          }
+        },
+        {
+          "name": "Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios", "{{usuarioId}}"]
+            },
+            "description": "Remove um usuário do sistema. Retorna 204 No Content."
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌾 Fazendas",
+      "item": [
+        {
+          "name": "Listar Minhas Fazendas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas?page=0&size=10&sort=id",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas"],
+              "query": [
+                { "key": "nome", "value": "", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "id" }
+              ]
+            },
+            "description": "Lista as fazendas do usuário autenticado. Filtro opcional: `nome`."
+          }
+        },
+        {
+          "name": "Listar Todas as Fazendas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/todas?page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "todas"],
+              "query": [
+                { "key": "nome", "value": "", "disabled": true },
+                { "key": "estado", "value": "", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "description": "Lista todas as fazendas do sistema. Filtros opcionais: `nome`, `estado`."
+          }
+        },
+        {
+          "name": "Buscar Fazenda por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}"]
+            }
+          }
+        },
+        {
+          "name": "Criar Fazenda",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('fazendaId', json.id);",
+                  "    console.log('fazendaId salvo:', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Fazenda São João\",\n  \"cidade\": \"Sorriso\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 5000.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fazendas",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas"]
+            },
+            "description": "Cria uma nova fazenda vinculada ao usuário autenticado. O `fazendaId` gerado é salvo automaticamente."
+          }
+        },
+        {
+          "name": "Atualizar Fazenda",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Fazenda São João Atualizada\",\n  \"cidade\": \"Sorriso\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 5500.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Fazenda",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}"]
+            },
+            "description": "Remove a fazenda. Só o dono pode deletar. Retorna 204."
+          }
+        },
+        {
+          "name": "Listar Leituras da Fazenda",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/leituras?page=0&size=10&sort=dataLeitura,desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}", "leituras"],
+              "query": [
+                { "key": "dataInicio", "value": "2026-01-01T00:00:00", "disabled": true },
+                { "key": "dataFim", "value": "2026-12-31T23:59:59", "disabled": true },
+                { "key": "anomalia", "value": "S", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "dataLeitura,desc" }
+              ]
+            },
+            "description": "Lista as leituras satelitais de uma fazenda. Filtros opcionais: `dataInicio`, `dataFim`, `anomalia` (S/N)."
+          }
+        },
+        {
+          "name": "Listar Alertas da Fazenda",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/alertas?page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}", "alertas"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🗺️ Setores de Plantio",
+      "item": [
+        {
+          "name": "Listar Setores da Fazenda",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores?page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}", "setores"],
+              "query": [
+                { "key": "cultura", "value": "", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "description": "Lista os setores de uma fazenda. Filtro opcional: `cultura`."
+          }
+        },
+        {
+          "name": "Criar Setor na Fazenda",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('setorId', json.id);",
+                  "    console.log('setorId salvo:', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Setor Norte\",\n  \"cultura\": \"Soja\",\n  \"areaHectares\": 1200.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}", "setores"]
+            },
+            "description": "Cria um setor dentro da fazenda especificada no path. O `setorId` é salvo automaticamente."
+          }
+        },
+        {
+          "name": "Atualizar Setor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Setor Norte Expandido\",\n  \"cultura\": \"Milho\",\n  \"areaHectares\": 1500.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/setores/{{setorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["setores", "{{setorId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Setor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/setores/{{setorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["setores", "{{setorId}}"]
+            },
+            "description": "Remove o setor. Só o dono da fazenda pode deletar. Retorna 204."
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛰️ Satélites",
+      "item": [
+        {
+          "name": "Listar Satélites",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/satelites?page=0&size=10&sort=id",
+              "host": ["{{baseUrl}}"],
+              "path": ["satelites"],
+              "query": [
+                { "key": "nome", "value": "", "disabled": true },
+                { "key": "operador", "value": "", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "id" }
+              ]
+            },
+            "description": "Lista todos os satélites. Filtros opcionais: `nome`, `operador`. Resposta é cacheada."
+          }
+        },
+        {
+          "name": "Buscar Satélite por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/satelites/{{sateliteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["satelites", "{{sateliteId}}"]
+            }
+          }
+        },
+        {
+          "name": "Listar Sensores do Satélite",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/satelites/{{sateliteId}}/sensores?page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["satelites", "{{sateliteId}}", "sensores"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "description": "Lista todos os sensores orbitais de um satélite específico."
+          }
+        }
+      ]
+    },
+    {
+      "name": "📡 Sensores Orbitais",
+      "item": [
+        {
+          "name": "Listar Sensores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sensores?page=0&size=10&sort=id",
+              "host": ["{{baseUrl}}"],
+              "path": ["sensores"],
+              "query": [
+                { "key": "nome", "value": "", "disabled": true },
+                { "key": "ativo", "value": "S", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "id" }
+              ]
+            },
+            "description": "Lista todos os sensores orbitais. Filtros: `nome`, `ativo` (S/N). Resposta é cacheada."
+          }
+        },
+        {
+          "name": "Buscar Sensor por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sensores/{{sensorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["sensores", "{{sensorId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 Leituras Satelitais",
+      "item": [
+        {
+          "name": "Registrar Leitura",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('leituraId', json.id);",
+                  "    console.log('leituraId salvo:', json.id);",
+                  "    if (json.anomalia === 'S') {",
+                  "        console.log('⚠️ Anomalia detectada! Verifique os alertas.');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"setorId\": {{setorId}},\n  \"valor\": 38.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leituras",
+              "host": ["{{baseUrl}}"],
+              "path": ["leituras"]
+            },
+            "description": "Registra uma nova leitura de sensor orbital. Se o valor for anômalo, um Alerta é gerado automaticamente. O `leituraId` é salvo."
+          }
+        },
+        {
+          "name": "Registrar Leitura (Sem Setor)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"valor\": 22.3\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leituras",
+              "host": ["{{baseUrl}}"],
+              "path": ["leituras"]
+            },
+            "description": "O campo `setorId` é opcional — pode ser omitido se a leitura for da fazenda inteira."
+          }
+        },
+        {
+          "name": "Buscar Leitura por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/leituras/{{leituraId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["leituras", "{{leituraId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚨 Alertas",
+      "item": [
+        {
+          "name": "Listar Alertas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas?page=0&size=10&sort=dataAlerta",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas"],
+              "query": [
+                { "key": "resolvido", "value": "N", "disabled": true },
+                { "key": "idTipoAlerta", "value": "1", "disabled": true },
+                { "key": "fazendaId", "value": "{{fazendaId}}", "disabled": true },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "dataAlerta" }
+              ]
+            },
+            "description": "Lista alertas com filtros opcionais: `resolvido` (S/N), `idTipoAlerta`, `fazendaId`."
+          }
+        },
+        {
+          "name": "Listar Alertas Pendentes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas?resolvido=N&page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas"],
+              "query": [
+                { "key": "resolvido", "value": "N" },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "description": "Atalho para listar apenas alertas ainda não resolvidos."
+          }
+        },
+        {
+          "name": "Buscar Alerta por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('alertaId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas/{{alertaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas", "{{alertaId}}"]
+            }
+          }
+        },
+        {
+          "name": "Resolver Alerta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"acaoTomada\": \"Irrigação emergencial realizada no Setor Norte. Temperatura reduzida para 28°C após 2 horas.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alertas/{{alertaId}}/resolver",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas", "{{alertaId}}", "resolver"]
+            },
+            "description": "Marca o alerta como resolvido e registra a ação tomada (AcaoAlerta). Campo `acaoTomada` é obrigatório (máx 500 chars)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔁 Fluxo Completo (E2E)",
+      "description": "Execute os requests nesta ordem para testar o fluxo completo da aplicação do zero.",
+      "item": [
+        {
+          "name": "1. Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('token', json.token);",
+                  "pm.collectionVariables.set('usuarioId', json.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Pietro Abrahamian\",\n  \"email\": \"pietro@spacecrop.com\",\n  \"senha\": \"fiap2026\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "2. Criar Fazenda",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('fazendaId', json.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Fazenda Orbital\",\n  \"cidade\": \"Primavera do Leste\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 8000.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fazendas",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas"]
+            }
+          }
+        },
+        {
+          "name": "3. Criar Setor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('setorId', json.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Bloco A - Cerrado\",\n  \"cultura\": \"Algodão\",\n  \"areaHectares\": 2000.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores",
+              "host": ["{{baseUrl}}"],
+              "path": ["fazendas", "{{fazendaId}}", "setores"]
+            }
+          }
+        },
+        {
+          "name": "4. Listar Satélites (pegar sensorId)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.content && json.content.length > 0) {",
+                  "    pm.collectionVariables.set('sateliteId', json.content[0].id);",
+                  "    console.log('sateliteId salvo:', json.content[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/satelites?page=0&size=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["satelites"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "5. Listar Sensores do Satélite (pegar sensorId)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.content && json.content.length > 0) {",
+                  "    pm.collectionVariables.set('sensorId', json.content[0].id);",
+                  "    console.log('sensorId salvo:', json.content[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/satelites/{{sateliteId}}/sensores",
+              "host": ["{{baseUrl}}"],
+              "path": ["satelites", "{{sateliteId}}", "sensores"]
+            }
+          }
+        },
+        {
+          "name": "6. Registrar Leitura (valor anômalo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('leituraId', json.id);",
+                  "console.log('Anomalia:', json.anomalia);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"setorId\": {{setorId}},\n  \"valor\": 99.9\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/leituras",
+              "host": ["{{baseUrl}}"],
+              "path": ["leituras"]
+            }
+          }
+        },
+        {
+          "name": "7. Verificar Alertas Gerados",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.content && json.content.length > 0) {",
+                  "    pm.collectionVariables.set('alertaId', json.content[0].id);",
+                  "    console.log('alertaId salvo:', json.content[0].id);",
+                  "} else {",
+                  "    console.log('Nenhum alerta encontrado.');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas?resolvido=N&fazendaId={{fazendaId}}&page=0&size=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas"],
+              "query": [
+                { "key": "resolvido", "value": "N" },
+                { "key": "fazendaId", "value": "{{fazendaId}}" },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "8. Resolver Alerta",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"acaoTomada\": \"Acionado sistema de irrigação automática. Valor normalizado após 30 minutos.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alertas/{{alertaId}}/resolver",
+              "host": ["{{baseUrl}}"],
+              "path": ["alertas", "{{alertaId}}", "resolver"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
