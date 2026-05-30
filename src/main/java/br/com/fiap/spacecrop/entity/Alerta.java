@@ -39,7 +39,7 @@ public class Alerta {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "fl_resolvido", nullable = false, length = 1)
+    @Column(name = "fl_resolvido", nullable = false, columnDefinition = "CHAR(1)")
     private Character resolvido;
 
     @Column(name = "dt_alerta", nullable = false)

@@ -41,7 +41,7 @@ public class AlertaController {
             @RequestParam(required = false) Long fazendaId,
             @PageableDefault(size = 10, sort = "dataAlerta") Pageable pageable) {
         
-        return ResponseEntity.ok(alertaService.listarTodos(resolvido, idTipoAlerta, fazendaId, pageable));
+        return ResponseEntity.ok(alertaService.listarTodos(resolvido != null ? resolvido.charAt(0) : null, idTipoAlerta, fazendaId, pageable));
     }
 
     @GetMapping("/{id}")

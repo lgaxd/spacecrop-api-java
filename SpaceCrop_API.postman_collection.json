@@ -1,65 +1,10 @@
 {
   "info": {
+    "_postman_id": "253267db-8e81-42b4-9bcc-cabf077ce233",
     "name": "SpaceCrop API",
     "description": "Collection completa para testes da SpaceCrop API — Global Solution 2026/1 FIAP.\n\n**Como usar:**\n1. Importe esta collection no Postman\n2. Crie um Environment com a variável `baseUrl` = `http://localhost:8080`\n3. Execute **Auth > Register** para criar sua conta\n4. Execute **Auth > Login** — o token JWT será salvo automaticamente na variável `token`\n5. Todos os demais requests já usam `{{token}}` no header Authorization",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:8080",
-      "type": "string"
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "usuarioId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "fazendaId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "setorId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "sateliteId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "sensorId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "leituraId",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "alertaId",
-      "value": "1",
-      "type": "string"
-    }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{token}}",
-        "type": "string"
-      }
-    ]
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20421695"
   },
   "item": [
     {
@@ -84,10 +29,15 @@
             }
           ],
           "request": {
-            "auth": { "type": "noauth" },
+            "auth": {
+              "type": "noauth"
+            },
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -95,11 +45,107 @@
             },
             "url": {
               "raw": "{{baseUrl}}/auth/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "register"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
             },
             "description": "Cadastra um novo usuário. O token JWT retornado é salvo automaticamente na variável `token`."
-          }
+          },
+          "response": [
+            {
+              "name": "Register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Lucas Grillo\",\n  \"email\": \"lucas@spacecrop.com\",\n  \"senha\": \"senha123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:12:32 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BzcGFjZWNyb3AuY29tIiwiaWF0IjoxNzgwMTY4MzUyLCJleHAiOjE3ODAyNTQ3NTJ9.vdAeh7uTU9-oAb15N023WLiQNzCrfM3pi4Pxb8eNv_s\",\n    \"tipo\": \"Bearer\",\n    \"id\": 23,\n    \"nome\": \"Lucas Grillo\",\n    \"email\": \"lucas@spacecrop.com\"\n}"
+            }
+          ]
         },
         {
           "name": "Login",
@@ -120,10 +166,15 @@
             }
           ],
           "request": {
-            "auth": { "type": "noauth" },
+            "auth": {
+              "type": "noauth"
+            },
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -131,11 +182,107 @@
             },
             "url": {
               "raw": "{{baseUrl}}/auth/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
             },
             "description": "Autentica o usuário e salva o JWT em `{{token}}`."
-          }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"lucas@spacecrop.com\",\n  \"senha\": \"senha123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:14:56 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhc0BzcGFjZWNyb3AuY29tIiwiaWF0IjoxNzgwMTY4NDk2LCJleHAiOjE3ODAyNTQ4OTZ9.Kf9I5zQ6BsDkESLY6PBy4Fv8px2JSQt4BRLXE7Ll5PI\",\n    \"tipo\": \"Bearer\",\n    \"id\": 23,\n    \"nome\": \"Lucas Grillo\",\n    \"email\": \"lucas@spacecrop.com\"\n}"
+            }
+          ]
         },
         {
           "name": "Logout",
@@ -144,11 +291,90 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/auth/logout",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "logout"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
             },
             "description": "Realiza logout (stateless — invalida sessão no lado do cliente)."
-          }
+          },
+          "response": [
+            {
+              "name": "Logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:15:11 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
         }
       ]
     },
@@ -162,18 +388,144 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/usuarios?page=0&size=10&sort=id",
-              "host": ["{{baseUrl}}"],
-              "path": ["usuarios"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios"
+              ],
               "query": [
-                { "key": "nome", "value": "", "disabled": true },
-                { "key": "email", "value": "", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "id" }
+                {
+                  "key": "nome",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "email",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "id"
+                }
               ]
             },
             "description": "Lista todos os usuários paginados. Filtros opcionais: `nome`, `email`."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Usuários",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios?page=0&size=10&sort=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ],
+                  "query": [
+                    {
+                      "key": "nome",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "email",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "id"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:15:25 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Joao Silva\",\n            \"email\": \"joao@email.com\"\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Maria Santos\",\n            \"email\": \"maria@email.com\"\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Carlos Oliveira\",\n            \"email\": \"carlos@email.com\"\n        },\n        {\n            \"id\": 4,\n            \"nome\": \"Ana Pereira\",\n            \"email\": \"ana@email.com\"\n        },\n        {\n            \"id\": 5,\n            \"nome\": \"Lucas Costa\",\n            \"email\": \"lucas@email.com\"\n        },\n        {\n            \"id\": 21,\n            \"nome\": \"admin\",\n            \"email\": \"admin@email.com\"\n        },\n        {\n            \"id\": 22,\n            \"nome\": \"Lucas Alcântara\",\n            \"email\": \"lucas.alcantara@email.com\"\n        },\n        {\n            \"id\": 23,\n            \"nome\": \"Lucas Grillo\",\n            \"email\": \"lucas@spacecrop.com\"\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 8,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 8,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Usuário por ID",
@@ -182,18 +534,108 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["usuarios", "{{usuarioId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
             },
             "description": "Retorna os dados do usuário autenticado. Só é possível buscar o próprio usuário."
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Usuário por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{usuarioId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:31:34 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 23,\n    \"nome\": \"Lucas Grillo\",\n    \"email\": \"lucas@spacecrop.com\"\n}"
+            }
+          ]
         },
         {
           "name": "Atualizar Usuário",
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -201,11 +643,107 @@
             },
             "url": {
               "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["usuarios", "{{usuarioId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
             },
             "description": "Atualiza nome, email e/ou senha. Todos os campos são opcionais."
-          }
+          },
+          "response": [
+            {
+              "name": "Atualizar Usuário",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Lucas Grillo Alcântara\",\n  \"email\": \"lucas.novo@spacecrop.com\",\n  \"senha\": \"novaSenha456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{usuarioId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:31:47 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 23,\n    \"nome\": \"Lucas Grillo Alcântara\",\n    \"email\": \"lucas.novo@spacecrop.com\"\n}"
+            }
+          ]
         },
         {
           "name": "Deletar Usuário",
@@ -214,11 +752,90 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["usuarios", "{{usuarioId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "{{usuarioId}}"
+              ]
             },
             "description": "Remove um usuário do sistema. Retorna 204 No Content."
-          }
+          },
+          "response": [
+            {
+              "name": "Deletar Usuário",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{usuarioId}}"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:36:57 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
         }
       ]
     },
@@ -232,17 +849,134 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas?page=0&size=10&sort=id",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas"
+              ],
               "query": [
-                { "key": "nome", "value": "", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "id" }
+                {
+                  "key": "nome",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "id"
+                }
               ]
             },
             "description": "Lista as fazendas do usuário autenticado. Filtro opcional: `nome`."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Minhas Fazendas",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas?page=0&size=10&sort=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas"
+                  ],
+                  "query": [
+                    {
+                      "key": "nome",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "id"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:43:19 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 21,\n            \"nome\": \"Fazenda São João\",\n            \"cidade\": \"Sorriso\",\n            \"estado\": \"MT\",\n            \"areaHectares\": 5000,\n            \"usuarioId\": 22\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 1,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 1,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Listar Todas as Fazendas",
@@ -251,17 +985,138 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/todas?page=0&size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "todas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "todas"
+              ],
               "query": [
-                { "key": "nome", "value": "", "disabled": true },
-                { "key": "estado", "value": "", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {
+                  "key": "nome",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "estado",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             },
             "description": "Lista todas as fazendas do sistema. Filtros opcionais: `nome`, `estado`."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Todas as Fazendas",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/todas?page=0&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "todas"
+                  ],
+                  "query": [
+                    {
+                      "key": "nome",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "estado",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:43:27 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Fazenda Boa Vista\",\n            \"cidade\": \"Uberlandia\",\n            \"estado\": \"MG\",\n            \"areaHectares\": 150.5,\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Fazenda Santa Maria\",\n            \"cidade\": \"Uberaba\",\n            \"estado\": \"MG\",\n            \"areaHectares\": 230,\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Fazenda Vale Verde\",\n            \"cidade\": \"Cuiaba\",\n            \"estado\": \"MT\",\n            \"areaHectares\": 500,\n            \"usuarioId\": 2\n        },\n        {\n            \"id\": 4,\n            \"nome\": \"Fazenda Rio Claro\",\n            \"cidade\": \"Rondonopolis\",\n            \"estado\": \"MT\",\n            \"areaHectares\": 320.5,\n            \"usuarioId\": 2\n        },\n        {\n            \"id\": 5,\n            \"nome\": \"Fazenda Horizonte\",\n            \"cidade\": \"Luis Eduardo Magalhaes\",\n            \"estado\": \"BA\",\n            \"areaHectares\": 1200,\n            \"usuarioId\": 3\n        },\n        {\n            \"id\": 6,\n            \"nome\": \"Fazenda Eldorado\",\n            \"cidade\": \"Barreiras\",\n            \"estado\": \"BA\",\n            \"areaHectares\": 850,\n            \"usuarioId\": 3\n        },\n        {\n            \"id\": 7,\n            \"nome\": \"Fazenda Boa Esperanca\",\n            \"cidade\": \"Dourados\",\n            \"estado\": \"MS\",\n            \"areaHectares\": 420,\n            \"usuarioId\": 4\n        },\n        {\n            \"id\": 8,\n            \"nome\": \"Fazenda Recanto\",\n            \"cidade\": \"Sorriso\",\n            \"estado\": \"MT\",\n            \"areaHectares\": 680,\n            \"usuarioId\": 5\n        },\n        {\n            \"id\": 21,\n            \"nome\": \"Fazenda São João\",\n            \"cidade\": \"Sorriso\",\n            \"estado\": \"MT\",\n            \"areaHectares\": 5000,\n            \"usuarioId\": 22\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 9,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 9,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Fazenda por ID",
@@ -270,10 +1125,97 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Fazenda por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:48:21 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 21,\n    \"nome\": \"Fazenda São João\",\n    \"cidade\": \"Sorriso\",\n    \"estado\": \"MT\",\n    \"areaHectares\": 5000,\n    \"usuarioId\": 22\n}"
+            }
+          ]
         },
         {
           "name": "Criar Fazenda",
@@ -295,7 +1237,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -303,18 +1248,115 @@
             },
             "url": {
               "raw": "{{baseUrl}}/fazendas",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas"
+              ]
             },
             "description": "Cria uma nova fazenda vinculada ao usuário autenticado. O `fazendaId` gerado é salvo automaticamente."
-          }
+          },
+          "response": [
+            {
+              "name": "Criar Fazenda",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Fazenda São João\",\n  \"cidade\": \"Sorriso\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 5000.0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:43:11 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 21,\n    \"nome\": \"Fazenda São João\",\n    \"cidade\": \"Sorriso\",\n    \"estado\": \"MT\",\n    \"areaHectares\": 5000,\n    \"usuarioId\": 22\n}"
+            }
+          ]
         },
         {
           "name": "Atualizar Fazenda",
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -322,10 +1364,106 @@
             },
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Atualizar Fazenda",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Fazenda São João Atualizada\",\n  \"cidade\": \"Sorriso\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 5500.0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:48:34 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 21,\n    \"nome\": \"Fazenda São João Atualizada\",\n    \"cidade\": \"Sorriso\",\n    \"estado\": \"MT\",\n    \"areaHectares\": 5500,\n    \"usuarioId\": 22\n}"
+            }
+          ]
         },
         {
           "name": "Deletar Fazenda",
@@ -334,11 +1472,90 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}"
+              ]
             },
             "description": "Remove a fazenda. Só o dono pode deletar. Retorna 204."
-          }
+          },
+          "response": [
+            {
+              "name": "Deletar Fazenda",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:48:43 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
         },
         {
           "name": "Listar Leituras da Fazenda",
@@ -347,19 +1564,158 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/leituras?page=0&size=10&sort=dataLeitura,desc",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}", "leituras"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}",
+                "leituras"
+              ],
               "query": [
-                { "key": "dataInicio", "value": "2026-01-01T00:00:00", "disabled": true },
-                { "key": "dataFim", "value": "2026-12-31T23:59:59", "disabled": true },
-                { "key": "anomalia", "value": "S", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "dataLeitura,desc" }
+                {
+                  "key": "dataInicio",
+                  "value": "2026-01-01T00:00:00",
+                  "disabled": true
+                },
+                {
+                  "key": "dataFim",
+                  "value": "2026-12-31T23:59:59",
+                  "disabled": true
+                },
+                {
+                  "key": "anomalia",
+                  "value": "S",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "dataLeitura,desc"
+                }
               ]
             },
             "description": "Lista as leituras satelitais de uma fazenda. Filtros opcionais: `dataInicio`, `dataFim`, `anomalia` (S/N)."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Leituras da Fazenda",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/leituras?page=0&size=10&sort=dataLeitura,desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}",
+                    "leituras"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataInicio",
+                      "value": "2026-01-01T00:00:00",
+                      "disabled": true
+                    },
+                    {
+                      "key": "dataFim",
+                      "value": "2026-12-31T23:59:59",
+                      "disabled": true
+                    },
+                    {
+                      "key": "anomalia",
+                      "value": "S",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "dataLeitura,desc"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 19:49:19 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 111,\n            \"valor\": 0,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 6,\n            \"sensorNome\": \"CBERS Precipitacao\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 110,\n            \"valor\": 10,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 8,\n            \"sensorNome\": \"GOES Solo\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 109,\n            \"valor\": 45.5,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"S\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 100,\n            \"valor\": 30,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 99,\n            \"valor\": 29,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 98,\n            \"valor\": 28,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 97,\n            \"valor\": 27,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 96,\n            \"valor\": 26,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 95,\n            \"valor\": 25,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        },\n        {\n            \"id\": 94,\n            \"valor\": 24,\n            \"dataLeitura\": \"2026-05-26T22:23:04\",\n            \"anomalia\": \"N\",\n            \"sensorOrbitalId\": 1,\n            \"sensorNome\": \"Landsat TIRS Temp\",\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"setorId\": null,\n            \"setorNome\": null\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": false,\n    \"number\": 0,\n    \"numberOfElements\": 10,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 24,\n    \"totalPages\": 3\n}"
+            }
+          ]
         },
         {
           "name": "Listar Alertas da Fazenda",
@@ -368,14 +1724,119 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/alertas?page=0&size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}", "alertas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}",
+                "alertas"
+              ],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Alertas da Fazenda",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/alertas?page=0&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}",
+                    "alertas"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:00:44 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 9,\n            \"idTipoAlerta\": 1,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 109,\n            \"valorLeitura\": 45.5,\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"usuarioId\": 1\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 1,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 1,\n    \"totalPages\": 1\n}"
+            }
+          ]
         }
       ]
     },
@@ -389,16 +1850,130 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores?page=0&size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}", "setores"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}",
+                "setores"
+              ],
               "query": [
-                { "key": "cultura", "value": "", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {
+                  "key": "cultura",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             },
             "description": "Lista os setores de uma fazenda. Filtro opcional: `cultura`."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Setores da Fazenda",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores?page=0&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}",
+                    "setores"
+                  ],
+                  "query": [
+                    {
+                      "key": "cultura",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:07:20 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Talhao Norte\",\n            \"cultura\": \"Soja\",\n            \"areaHectares\": 80,\n            \"fazendaId\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Talhao Sul\",\n            \"cultura\": \"Milho\",\n            \"areaHectares\": 70.5,\n            \"fazendaId\": 1\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 2,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 2,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Criar Setor na Fazenda",
@@ -420,7 +1995,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -428,18 +2006,119 @@
             },
             "url": {
               "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}", "setores"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fazendas",
+                "{{fazendaId}}",
+                "setores"
+              ]
             },
             "description": "Cria um setor dentro da fazenda especificada no path. O `setorId` é salvo automaticamente."
-          }
+          },
+          "response": [
+            {
+              "name": "Criar Setor na Fazenda",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Setor Norte\",\n  \"cultura\": \"Soja\",\n  \"areaHectares\": 1200.0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fazendas",
+                    "{{fazendaId}}",
+                    "setores"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:08:41 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 21,\n    \"nome\": \"Setor Norte\",\n    \"cultura\": \"Soja\",\n    \"areaHectares\": 1200,\n    \"fazendaId\": 22\n}"
+            }
+          ]
         },
         {
           "name": "Atualizar Setor",
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -447,10 +2126,106 @@
             },
             "url": {
               "raw": "{{baseUrl}}/setores/{{setorId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["setores", "{{setorId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "setores",
+                "{{setorId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Atualizar Setor",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Setor Norte Expandido\",\n  \"cultura\": \"Milho\",\n  \"areaHectares\": 1500.0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/setores/{{setorId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "setores",
+                    "{{setorId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:08:57 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 21,\n    \"nome\": \"Setor Norte Expandido\",\n    \"cultura\": \"Milho\",\n    \"areaHectares\": 1500,\n    \"fazendaId\": 22\n}"
+            }
+          ]
         },
         {
           "name": "Deletar Setor",
@@ -459,11 +2234,90 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/setores/{{setorId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["setores", "{{setorId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "setores",
+                "{{setorId}}"
+              ]
             },
             "description": "Remove o setor. Só o dono da fazenda pode deletar. Retorna 204."
-          }
+          },
+          "response": [
+            {
+              "name": "Deletar Setor",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/setores/{{setorId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "setores",
+                    "{{setorId}}"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:09:07 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
         }
       ]
     },
@@ -477,18 +2331,144 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/satelites?page=0&size=10&sort=id",
-              "host": ["{{baseUrl}}"],
-              "path": ["satelites"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "satelites"
+              ],
               "query": [
-                { "key": "nome", "value": "", "disabled": true },
-                { "key": "operador", "value": "", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "id" }
+                {
+                  "key": "nome",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "operador",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "id"
+                }
               ]
             },
             "description": "Lista todos os satélites. Filtros opcionais: `nome`, `operador`. Resposta é cacheada."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Satélites",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/satelites?page=0&size=10&sort=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "satelites"
+                  ],
+                  "query": [
+                    {
+                      "key": "nome",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "operador",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "id"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:15:17 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Landsat-9\",\n            \"operador\": \"NASA\",\n            \"ativo\": \"S\"\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Sentinel-2\",\n            \"operador\": \"ESA\",\n            \"ativo\": \"S\"\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"CBERS-4\",\n            \"operador\": \"INPE/China\",\n            \"ativo\": \"S\"\n        },\n        {\n            \"id\": 4,\n            \"nome\": \"GOES-16\",\n            \"operador\": \"NOAA\",\n            \"ativo\": \"S\"\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 4,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 4,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Satélite por ID",
@@ -497,10 +2477,97 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/satelites/{{sateliteId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["satelites", "{{sateliteId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "satelites",
+                "{{sateliteId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Satélite por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/satelites/{{sateliteId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "satelites",
+                    "{{sateliteId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:15:23 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"nome\": \"Landsat-9\",\n    \"operador\": \"NASA\",\n    \"ativo\": \"S\"\n}"
+            }
+          ]
         },
         {
           "name": "Listar Sensores do Satélite",
@@ -509,15 +2576,120 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/satelites/{{sateliteId}}/sensores?page=0&size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["satelites", "{{sateliteId}}", "sensores"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "satelites",
+                "{{sateliteId}}",
+                "sensores"
+              ],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             },
             "description": "Lista todos os sensores orbitais de um satélite específico."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Sensores do Satélite",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/satelites/{{sateliteId}}/sensores?page=0&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "satelites",
+                    "{{sateliteId}}",
+                    "sensores"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:15:29 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Landsat TIRS Temp\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 1,\n            \"sateliteNome\": \"Landsat-9\",\n            \"idTipoSensor\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Landsat TIRS Umidade\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 1,\n            \"sateliteNome\": \"Landsat-9\",\n            \"idTipoSensor\": 2\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 2,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 2,\n    \"totalPages\": 1\n}"
+            }
+          ]
         }
       ]
     },
@@ -531,18 +2703,144 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/sensores?page=0&size=10&sort=id",
-              "host": ["{{baseUrl}}"],
-              "path": ["sensores"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores"
+              ],
               "query": [
-                { "key": "nome", "value": "", "disabled": true },
-                { "key": "ativo", "value": "S", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "id" }
+                {
+                  "key": "nome",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "ativo",
+                  "value": "S",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "id"
+                }
               ]
             },
             "description": "Lista todos os sensores orbitais. Filtros: `nome`, `ativo` (S/N). Resposta é cacheada."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Sensores",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sensores?page=0&size=10&sort=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensores"
+                  ],
+                  "query": [
+                    {
+                      "key": "nome",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "ativo",
+                      "value": "S",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "id"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:15:37 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Landsat TIRS Temp\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 1,\n            \"sateliteNome\": \"Landsat-9\",\n            \"idTipoSensor\": 1\n        },\n        {\n            \"id\": 2,\n            \"nome\": \"Landsat TIRS Umidade\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 1,\n            \"sateliteNome\": \"Landsat-9\",\n            \"idTipoSensor\": 2\n        },\n        {\n            \"id\": 3,\n            \"nome\": \"Sentinel MSI NDVI\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 2,\n            \"sateliteNome\": \"Sentinel-2\",\n            \"idTipoSensor\": 3\n        },\n        {\n            \"id\": 4,\n            \"nome\": \"Sentinel MSI Lum\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 2,\n            \"sateliteNome\": \"Sentinel-2\",\n            \"idTipoSensor\": 5\n        },\n        {\n            \"id\": 5,\n            \"nome\": \"CBERS IR Umidade\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 3,\n            \"sateliteNome\": \"CBERS-4\",\n            \"idTipoSensor\": 2\n        },\n        {\n            \"id\": 6,\n            \"nome\": \"CBERS Precipitacao\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 3,\n            \"sateliteNome\": \"CBERS-4\",\n            \"idTipoSensor\": 6\n        },\n        {\n            \"id\": 7,\n            \"nome\": \"GOES Temp\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 4,\n            \"sateliteNome\": \"GOES-16\",\n            \"idTipoSensor\": 1\n        },\n        {\n            \"id\": 8,\n            \"nome\": \"GOES Solo\",\n            \"ativo\": \"S\",\n            \"sateliteId\": 4,\n            \"sateliteNome\": \"GOES-16\",\n            \"idTipoSensor\": 4\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 8,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 8,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Sensor por ID",
@@ -551,10 +2849,97 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/sensores/{{sensorId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["sensores", "{{sensorId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                "{{sensorId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Sensor por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sensores/{{sensorId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensores",
+                    "{{sensorId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:15:43 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"nome\": \"Landsat TIRS Temp\",\n    \"ativo\": \"S\",\n    \"sateliteId\": 1,\n    \"sateliteNome\": \"Landsat-9\",\n    \"idTipoSensor\": 1\n}"
+            }
+          ]
         }
       ]
     },
@@ -584,7 +2969,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -592,18 +2980,115 @@
             },
             "url": {
               "raw": "{{baseUrl}}/leituras",
-              "host": ["{{baseUrl}}"],
-              "path": ["leituras"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "leituras"
+              ]
             },
             "description": "Registra uma nova leitura de sensor orbital. Se o valor for anômalo, um Alerta é gerado automaticamente. O `leituraId` é salvo."
-          }
+          },
+          "response": [
+            {
+              "name": "Registrar Leitura",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"setorId\": {{setorId}},\n  \"valor\": 38.5\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/leituras",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "leituras"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:20:29 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 121,\n    \"valor\": 38.5,\n    \"dataLeitura\": \"2026-05-30T17:20:29.595197\",\n    \"anomalia\": \"N\",\n    \"sensorOrbitalId\": 1,\n    \"sensorNome\": \"Landsat TIRS Temp\",\n    \"fazendaId\": 22,\n    \"fazendaNome\": \"Fazenda São Luiz\",\n    \"setorId\": 22,\n    \"setorNome\": \"Setor Norte\"\n}"
+            }
+          ]
         },
         {
           "name": "Registrar Leitura (Sem Setor)",
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -611,11 +3096,105 @@
             },
             "url": {
               "raw": "{{baseUrl}}/leituras",
-              "host": ["{{baseUrl}}"],
-              "path": ["leituras"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "leituras"
+              ]
             },
             "description": "O campo `setorId` é opcional — pode ser omitido se a leitura for da fazenda inteira."
-          }
+          },
+          "response": [
+            {
+              "name": "Registrar Leitura (Sem Setor)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"valor\": 22.3\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/leituras",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "leituras"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:20:38 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 122,\n    \"valor\": 22.3,\n    \"dataLeitura\": \"2026-05-30T17:20:38.2395383\",\n    \"anomalia\": \"N\",\n    \"sensorOrbitalId\": 1,\n    \"sensorNome\": \"Landsat TIRS Temp\",\n    \"fazendaId\": 22,\n    \"fazendaNome\": \"Fazenda São Luiz\",\n    \"setorId\": null,\n    \"setorNome\": null\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Leitura por ID",
@@ -624,10 +3203,97 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/leituras/{{leituraId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["leituras", "{{leituraId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "leituras",
+                "{{leituraId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Leitura por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/leituras/{{leituraId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "leituras",
+                    "{{leituraId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:35:27 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 121,\n    \"valor\": 38.5,\n    \"dataLeitura\": \"2026-05-30T17:20:29\",\n    \"anomalia\": \"N\",\n    \"sensorOrbitalId\": 1,\n    \"sensorNome\": \"Landsat TIRS Temp\",\n    \"fazendaId\": 22,\n    \"fazendaNome\": \"Fazenda São Luiz\",\n    \"setorId\": 22,\n    \"setorNome\": \"Setor Norte\"\n}"
+            }
+          ]
         }
       ]
     },
@@ -641,19 +3307,154 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/alertas?page=0&size=10&sort=dataAlerta",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ],
               "query": [
-                { "key": "resolvido", "value": "N", "disabled": true },
-                { "key": "idTipoAlerta", "value": "1", "disabled": true },
-                { "key": "fazendaId", "value": "{{fazendaId}}", "disabled": true },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "dataAlerta" }
+                {
+                  "key": "resolvido",
+                  "value": "N",
+                  "disabled": true
+                },
+                {
+                  "key": "idTipoAlerta",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "fazendaId",
+                  "value": "{{fazendaId}}",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "dataAlerta"
+                }
               ]
             },
             "description": "Lista alertas com filtros opcionais: `resolvido` (S/N), `idTipoAlerta`, `fazendaId`."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Alertas",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alertas?page=0&size=10&sort=dataAlerta",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alertas"
+                  ],
+                  "query": [
+                    {
+                      "key": "resolvido",
+                      "value": "N",
+                      "disabled": true
+                    },
+                    {
+                      "key": "idTipoAlerta",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fazendaId",
+                      "value": "{{fazendaId}}",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "dataAlerta"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:35:39 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 101,\n            \"valorLeitura\": 31,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 2,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 102,\n            \"valorLeitura\": 32,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 3,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 103,\n            \"valorLeitura\": 33,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 4,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 104,\n            \"valorLeitura\": 34,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 5,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 105,\n            \"valorLeitura\": 35,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 6,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 106,\n            \"valorLeitura\": 36,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 7,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 107,\n            \"valorLeitura\": 37,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 8,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 108,\n            \"valorLeitura\": 38,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 9,\n            \"idTipoAlerta\": 1,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 109,\n            \"valorLeitura\": 45.5,\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"usuarioId\": 1\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 9,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 9,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Listar Alertas Pendentes",
@@ -662,16 +3463,124 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/alertas?resolvido=N&page=0&size=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ],
               "query": [
-                { "key": "resolvido", "value": "N" },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {
+                  "key": "resolvido",
+                  "value": "N"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             },
             "description": "Atalho para listar apenas alertas ainda não resolvidos."
-          }
+          },
+          "response": [
+            {
+              "name": "Listar Alertas Pendentes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alertas?resolvido=N&page=0&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alertas"
+                  ],
+                  "query": [
+                    {
+                      "key": "resolvido",
+                      "value": "N"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:39:54 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 101,\n            \"valorLeitura\": 31,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 2,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 102,\n            \"valorLeitura\": 32,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 3,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 103,\n            \"valorLeitura\": 33,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 4,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 104,\n            \"valorLeitura\": 34,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 5,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 105,\n            \"valorLeitura\": 35,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 6,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 106,\n            \"valorLeitura\": 36,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 7,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 107,\n            \"valorLeitura\": 37,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 8,\n            \"idTipoAlerta\": 2,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 108,\n            \"valorLeitura\": 38,\n            \"fazendaId\": 2,\n            \"fazendaNome\": \"Fazenda Santa Maria\",\n            \"usuarioId\": 1\n        },\n        {\n            \"id\": 9,\n            \"idTipoAlerta\": 1,\n            \"resolvido\": \"N\",\n            \"dataAlerta\": \"2026-05-26T22:23:04\",\n            \"leituraId\": 109,\n            \"valorLeitura\": 45.5,\n            \"fazendaId\": 1,\n            \"fazendaNome\": \"Fazenda Boa Vista\",\n            \"usuarioId\": 1\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": true,\n    \"number\": 0,\n    \"numberOfElements\": 9,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 9,\n    \"totalPages\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Buscar Alerta por ID",
@@ -694,17 +3603,107 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/alertas/{{alertaId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas", "{{alertaId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas",
+                "{{alertaId}}"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "Buscar Alerta por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alertas/{{alertaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alertas",
+                    "{{alertaId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:40:04 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"idTipoAlerta\": 2,\n    \"resolvido\": \"N\",\n    \"dataAlerta\": \"2026-05-26T22:23:04\",\n    \"leituraId\": 101,\n    \"valorLeitura\": 31,\n    \"fazendaId\": 2,\n    \"fazendaNome\": \"Fazenda Santa Maria\",\n    \"usuarioId\": 1\n}"
+            }
+          ]
         },
         {
           "name": "Resolver Alerta",
           "request": {
             "method": "PUT",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -712,243 +3711,159 @@
             },
             "url": {
               "raw": "{{baseUrl}}/alertas/{{alertaId}}/resolver",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas", "{{alertaId}}", "resolver"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas",
+                "{{alertaId}}",
+                "resolver"
+              ]
             },
             "description": "Marca o alerta como resolvido e registra a ação tomada (AcaoAlerta). Campo `acaoTomada` é obrigatório (máx 500 chars)."
-          }
+          },
+          "response": [
+            {
+              "name": "Resolver Alerta",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"acaoTomada\": \"Irrigação emergencial realizada no Setor Norte. Temperatura reduzida para 28°C após 2 horas.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alertas/{{alertaId}}/resolver",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alertas",
+                    "{{alertaId}}",
+                    "resolver"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Method"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Access-Control-Request-Headers"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                  "key": "Pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Expires",
+                  "value": "0"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 30 May 2026 20:40:09 GMT"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=60"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"idTipoAlerta\": 2,\n    \"resolvido\": \"S\",\n    \"dataAlerta\": \"2026-05-26T22:23:04\",\n    \"leituraId\": 101,\n    \"valorLeitura\": 31,\n    \"fazendaId\": 2,\n    \"fazendaNome\": \"Fazenda Santa Maria\",\n    \"usuarioId\": 1\n}"
+            }
+          ]
         }
       ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
     },
     {
-      "name": "🔁 Fluxo Completo (E2E)",
-      "description": "Execute os requests nesta ordem para testar o fluxo completo da aplicação do zero.",
-      "item": [
-        {
-          "name": "1. Register",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "pm.collectionVariables.set('token', json.token);",
-                  "pm.collectionVariables.set('usuarioId', json.id);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "auth": { "type": "noauth" },
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nome\": \"Pietro Abrahamian\",\n  \"email\": \"pietro@spacecrop.com\",\n  \"senha\": \"fiap2026\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "register"]
-            }
-          }
-        },
-        {
-          "name": "2. Criar Fazenda",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "pm.collectionVariables.set('fazendaId', json.id);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nome\": \"Fazenda Orbital\",\n  \"cidade\": \"Primavera do Leste\",\n  \"estado\": \"MT\",\n  \"areaHectares\": 8000.0\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/fazendas",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas"]
-            }
-          }
-        },
-        {
-          "name": "3. Criar Setor",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "pm.collectionVariables.set('setorId', json.id);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nome\": \"Bloco A - Cerrado\",\n  \"cultura\": \"Algodão\",\n  \"areaHectares\": 2000.0\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/fazendas/{{fazendaId}}/setores",
-              "host": ["{{baseUrl}}"],
-              "path": ["fazendas", "{{fazendaId}}", "setores"]
-            }
-          }
-        },
-        {
-          "name": "4. Listar Satélites (pegar sensorId)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json.content && json.content.length > 0) {",
-                  "    pm.collectionVariables.set('sateliteId', json.content[0].id);",
-                  "    console.log('sateliteId salvo:', json.content[0].id);",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/satelites?page=0&size=5",
-              "host": ["{{baseUrl}}"],
-              "path": ["satelites"],
-              "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "5" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "5. Listar Sensores do Satélite (pegar sensorId)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json.content && json.content.length > 0) {",
-                  "    pm.collectionVariables.set('sensorId', json.content[0].id);",
-                  "    console.log('sensorId salvo:', json.content[0].id);",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/satelites/{{sateliteId}}/sensores",
-              "host": ["{{baseUrl}}"],
-              "path": ["satelites", "{{sateliteId}}", "sensores"]
-            }
-          }
-        },
-        {
-          "name": "6. Registrar Leitura (valor anômalo)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "pm.collectionVariables.set('leituraId', json.id);",
-                  "console.log('Anomalia:', json.anomalia);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sensorOrbitalId\": {{sensorId}},\n  \"fazendaId\": {{fazendaId}},\n  \"setorId\": {{setorId}},\n  \"valor\": 99.9\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/leituras",
-              "host": ["{{baseUrl}}"],
-              "path": ["leituras"]
-            }
-          }
-        },
-        {
-          "name": "7. Verificar Alertas Gerados",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json.content && json.content.length > 0) {",
-                  "    pm.collectionVariables.set('alertaId', json.content[0].id);",
-                  "    console.log('alertaId salvo:', json.content[0].id);",
-                  "} else {",
-                  "    console.log('Nenhum alerta encontrado.');",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/alertas?resolvido=N&fazendaId={{fazendaId}}&page=0&size=5",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas"],
-              "query": [
-                { "key": "resolvido", "value": "N" },
-                { "key": "fazendaId", "value": "{{fazendaId}}" },
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "5" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "8. Resolver Alerta",
-          "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"acaoTomada\": \"Acionado sistema de irrigação automática. Valor normalizado após 30 minutos.\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/alertas/{{alertaId}}/resolver",
-              "host": ["{{baseUrl}}"],
-              "path": ["alertas", "{{alertaId}}", "resolver"]
-            }
-          }
-        }
-      ]
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    },
+    {
+      "key": "fazendaId",
+      "value": "1"
+    },
+    {
+      "key": "setorId",
+      "value": "1"
+    },
+    {
+      "key": "sateliteId",
+      "value": "1"
+    },
+    {
+      "key": "sensorId",
+      "value": "1"
+    },
+    {
+      "key": "leituraId",
+      "value": "1"
+    },
+    {
+      "key": "alertaId",
+      "value": "1"
     }
   ]
 }

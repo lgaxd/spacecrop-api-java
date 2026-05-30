@@ -28,7 +28,7 @@ public class AlertaService {
             .map(this::toResponseDTO);
     }
 
-    public Page<AlertaResponseDTO> listarTodos(String resolvido, Long idTipoAlerta, Long fazendaId, Pageable pageable) {
+    public Page<AlertaResponseDTO> listarTodos(Character resolvido, Long idTipoAlerta, Long fazendaId, Pageable pageable) {
         return alertaRepository.findAllWithFilters(resolvido, idTipoAlerta, fazendaId, pageable)
             .map(this::toResponseDTO);
     }

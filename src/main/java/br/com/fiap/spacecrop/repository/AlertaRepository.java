@@ -17,7 +17,7 @@ public interface AlertaRepository extends JpaRepository<Alerta, Long> {
             "(:resolvido IS NULL OR a.resolvido = :resolvido) AND " +
             "(:idTipoAlerta IS NULL OR a.idTipoAlerta = :idTipoAlerta) AND " +
             "(:fazendaId IS NULL OR a.leitura.fazenda.id = :fazendaId)")
-    Page<Alerta> findAllWithFilters(@Param("resolvido") String resolvido,
+    Page<Alerta> findAllWithFilters(@Param("resolvido") Character resolvido,
             @Param("idTipoAlerta") Long idTipoAlerta,
             @Param("fazendaId") Long fazendaId,
             Pageable pageable);

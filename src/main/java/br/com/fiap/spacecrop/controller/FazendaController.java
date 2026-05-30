@@ -136,7 +136,7 @@ public class FazendaController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFim,
             @RequestParam(required = false) String anomalia,
-            @PageableDefault(size = 10, sort = "dataLeitura,desc") Pageable pageable) {
+            @PageableDefault(size = 10, sort = "dataLeitura") Pageable pageable) {
 
         return ResponseEntity.ok(leituraService.listarPorFazenda(fazendaId, dataInicio, dataFim, anomalia, pageable));
     }
@@ -145,7 +145,7 @@ public class FazendaController {
     @Operation(summary = "Listar alertas da fazenda")
     public ResponseEntity<Page<AlertaResponseDTO>> listarAlertas(
             @PathVariable Long fazendaId,
-            @PageableDefault(size = 10, sort = "dataAlerta,desc") Pageable pageable) {
+            @PageableDefault(size = 10, sort = "dataAlerta") Pageable pageable) {
 
         return ResponseEntity.ok(alertaService.listarPorFazenda(fazendaId, pageable));
     }
