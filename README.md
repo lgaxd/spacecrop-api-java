@@ -30,10 +30,10 @@ O projeto integra o tema da **Global Solution 2026/1 da FIAP**, que propõe solu
 |---|---|
 | 📦 Repositório GitHub | `https://github.com/lgaxd/spacecrop-api-java` |
 | 🎬 Vídeo de Apresentação | *(adicionar link)* |
-| 🎯 Vídeo Pitch | *(adicionar link)* |
+| 🎯 Vídeo Pitch | `https://www.youtube.com/watch?v=gjCMcwhsAEs` |
 | 📖 Documentação Swagger | `http://68.211.88.151:8080/swagger` |
 | 📄 OpenAPI Spec | `http://68.211.88.151:8080/api-docs` |
-| 🚀 Deploy | `http://68.211.88.151:8080/swagger` |
+| 🚀 Deploy | `http://68.211.88.151:8080` |
  
 ---
  
@@ -94,22 +94,31 @@ Satelite
 | Maven | 3.9.16 | Build e dependências |
  
 ---
- 
-## 🚀 Como Executar
+
+## 🚀 Como Testar (Na Nuvem)
+
+Acesse o link `http://68.211.88.151:8080/swagger` para explorar e testar todos os endpoints interativamente.
+
+---
+
+## 🚀 Como Executar (localmente)
  
 ### Pré-requisitos
  
 - Java 21+
 - Maven 3.9+
 - Oracle Database (ou acesso a instância remota)
+
 ### 1. Clone o repositório
  
 ```bash
 git clone https://github.com/lgaxd/spacecrop-api-java.git
 cd spacecrop-api-java
 ```
+
+### 2. Crie o banco de dados Oracle com o código SQL incluso no projeto
  
-### 2. Configure as variáveis de ambiente
+### 3. Configure as variáveis de ambiente
  
 Crie um arquivo `.env` ou configure as variáveis diretamente no sistema:
  
@@ -120,10 +129,10 @@ export DATABASE_PASSWORD=sua_senha
 export JWT_SECRET=sua_chave_secreta_com_minimo_32_caracteres
 export JWT_EXPIRATION=86400000   # 24h em milissegundos (opcional)
 ```
- 
+
 > ⚠️ O `JWT_SECRET` deve ter no mínimo 32 caracteres para funcionar corretamente com HS256.
- 
-### 3. Execute a aplicação
+
+### 4. Execute a aplicação
  
 ```bash
 ./mvnw spring-boot:run
@@ -131,7 +140,7 @@ export JWT_EXPIRATION=86400000   # 24h em milissegundos (opcional)
  
 A API estará disponível em `http://localhost:8080`.
  
-### 4. Acesse a documentação
+### 5. Acesse a documentação
  
 Abra o navegador em `http://localhost:8080/swagger` para explorar e testar todos os endpoints interativamente.
  
@@ -230,68 +239,6 @@ curl -X POST http://localhost:8080/auth/login \
 | DELETE | `/alertas/{id}` | Remover alerta |
  
 > 📖 A documentação completa com schemas, exemplos de request/response e possibilidade de teste está disponível no Swagger: `GET /swagger`
- 
----
- 
-## 🧪 Testando a API
- 
-### Fluxo completo de exemplo
- 
-```bash
-TOKEN="eyJ..."  # Substitua pelo token obtido no login
- 
-# 1. Cadastrar uma fazenda
-curl -X POST http://localhost:8080/fazendas \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"nome": "Fazenda São João", "localizacao": "Mato Grosso", "areaTotal": 5000.0}'
- 
-# 2. Cadastrar um setor dentro da fazenda
-curl -X POST http://localhost:8080/setores \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"nome": "Setor Norte", "cultura": "Soja", "areaHectares": 1200.0, "fazendaId": 1}'
- 
-# 3. Registrar uma leitura de sensor
-curl -X POST http://localhost:8080/leituras \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"sensorOrbitalId": 1, "setorPlantioId": 1, "valor": 38.5, "unidade": "°C", "dataHora": "2026-05-29T14:00:00"}'
- 
-# 4. Verificar alertas gerados
-curl http://localhost:8080/alertas \
-  -H "Authorization: Bearer $TOKEN"
-```
- 
-### Tratamento de erros
- 
-A API retorna respostas padronizadas para todos os erros:
- 
-```json
-// 404 - Recurso não encontrado
-{
-  "status": 404,
-  "erro": "Recurso não encontrado",
-  "mensagem": "Fazenda não encontrada com ID: 99",
-  "timestamp": "2026-05-29T14:30:00"
-}
- 
-// 400 - Validação
-{
-  "status": 400,
-  "erro": "Dados inválidos",
-  "campos": {
-    "nome": "Nome é obrigatório",
-    "areaHectares": "Área deve ser positiva"
-  }
-}
- 
-// 401 - Não autenticado
-{
-  "status": 401,
-  "erro": "Não autorizado"
-}
-```
  
 ---
  
