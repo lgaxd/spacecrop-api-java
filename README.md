@@ -253,4 +253,201 @@ curl -X POST http://localhost:8080/auth/login \
 
 ---
 
+## 📐 Diagrama de Arquitetura em Camadas
+
+```mermaid
+flowchart TB
+    subgraph CLIENT["🌐 Cliente"]
+        FRONT["Frontend / Swagger / Mobile"]
+    end
+
+    subgraph CONTROLLER["📡 Controller Layer"]
+        AC["AuthController"]
+        UC["UsuarioController"]
+        FC["FazendaController"]
+        SC["SetorPlantioController"]
+        LC["LeituraController"]
+        ALC["AlertaController"]
+        SATC["SateliteController"]
+        SENC["SensorOrbitalController"]
+    end
+
+    subgraph SERVICE["⚙️ Service Layer"]
+        AS["AuthService"]
+        US["UsuarioService"]
+        FS["FazendaService"]
+        SPS["SetorPlantioService"]
+        LS["LeituraService"]
+        ALS["AlertaService"]
+        SATS["SateliteService"]
+        SENS["SensorOrbitalService"]
+        CUDS["CustomUserDetailsService"]
+    end
+
+    subgraph REPOSITORY["🗄️ Repository Layer"]
+        UR["UsuarioRepository"]
+        FR["FazendaRepository"]
+        SPR["SetorPlantioRepository"]
+        LR["LeituraSateliteRepository"]
+        SATR["SateliteRepository"]
+        SENR["SensorOrbitalRepository"]
+        AR["AlertaRepository"]
+        AAR["AcaoAlertaRepository"]
+    end
+
+    subgraph DATABASE["💾 Oracle Database"]
+        TB_USUARIO["TB_USUARIO"]
+        TB_FAZENDA["TB_FAZENDA"]
+        TB_SETOR["TB_SETOR_PLANTIO"]
+        TB_LEITURA["TB_LEITURA_SATELITE"]
+        TB_SATELITE["TB_SATELITE"]
+        TB_SENSOR["TB_SENSOR_ORBITAL"]
+        TB_ALERTA["TB_ALERTA"]
+        TB_ACAO["TB_ACAO_ALERTA"]
+    end
+
+    FRONT -->|HTTP + JWT| AC
+    FRONT -->|HTTP + JWT| UC
+    FRONT -->|HTTP + JWT| FC
+    FRONT -->|HTTP + JWT| SC
+    FRONT -->|HTTP + JWT| LC
+    FRONT -->|HTTP + JWT| ALC
+    FRONT -->|HTTP + JWT| SATC
+    FRONT -->|HTTP + JWT| SENC
+
+    AC --> AS
+    UC --> US
+    FC --> FS
+    SC --> SPS
+    LC --> LS
+    ALC --> ALS
+    SATC --> SATS
+    SENC --> SENS
+    
+    AS --> US
+    AS --> CUDS
+
+    US --> UR
+    FS --> FR
+    SPS --> SPR
+    LS --> LR
+    ALS --> AR
+    ALS --> AAR
+    SATS --> SATR
+    SENS --> SENR
+
+    UR --> TB_USUARIO
+    FR --> TB_FAZENDA
+    SPR --> TB_SETOR
+    LR --> TB_LEITURA
+    SATR --> TB_SATELITE
+    SENR --> TB_SENSOR
+    AR --> TB_ALERTA
+    AAR --> TB_ACAO
+
+    TB_USUARIO --> TB_FAZENDA
+    TB_FAZENDA --> TB_SETOR
+    TB_SETOR --> TB_LEITURA
+    TB_SATELITE --> TB_SENSOR
+    TB_SENSOR --> TB_LEITURA
+    TB_LEITURA --> TB_ALERTA
+    TB_ALERTA --> TB_ACAO
+```
+
+---
+
+## 📐 Diagrama de Classes (Modelo de Dados)
+
+```mermaid
+classDiagram
+    class Usuario {
+        +Long id
+        +String nome
+        +String email
+        +String senhaHash
+        +List~Fazenda~ fazendas
+        +List~Alerta~ alertas
+        +List~AcaoAlerta~ acoes
+    }
+
+    class Fazenda {
+        +Long id
+        +String nome
+        +String cidade
+        +String estado
+        +Double areaHectares
+        +Usuario usuario
+        +List~SetorPlantio~ setores
+        +List~LeituraSatelite~ leituras
+    }
+
+    class SetorPlantio {
+        +Long id
+        +String nome
+        +String cultura
+        +Double areaHectares
+        +Fazenda fazenda
+        +List~LeituraSatelite~ leituras
+    }
+
+    class LeituraSatelite {
+        +Long id
+        +Double valor
+        +LocalDateTime dataLeitura
+        +String anomalia
+        +SensorOrbital sensorOrbital
+        +Fazenda fazenda
+        +SetorPlantio setor
+        +Alerta alerta
+    }
+
+    class Satelite {
+        +Long id
+        +String nome
+        +String operador
+        +String ativo
+        +List~SensorOrbital~ sensores
+    }
+
+    class SensorOrbital {
+        +Long id
+        +String nome
+        +String ativo
+        +Long idTipoSensor
+        +Satelite satelite
+        +List~LeituraSatelite~ leituras
+    }
+
+    class Alerta {
+        +Long id
+        +Long idTipoAlerta
+        +Character resolvido
+        +LocalDateTime dataAlerta
+        +LeituraSatelite leitura
+        +Usuario usuario
+        +List~AcaoAlerta~ acoes
+    }
+
+    class AcaoAlerta {
+        +Long id
+        +String acaoTomada
+        +LocalDateTime dataAcao
+        +Alerta alerta
+        +Usuario usuario
+    }
+
+    Usuario "1" --> "N" Fazenda
+    Fazenda "1" --> "N" SetorPlantio
+    SetorPlantio "1" --> "N" LeituraSatelite
+    Fazenda "1" --> "N" LeituraSatelite
+    Satelite "1" --> "N" SensorOrbital
+    SensorOrbital "1" --> "N" LeituraSatelite
+    LeituraSatelite "1" --> "1" Alerta
+    Alerta "1" --> "N" AcaoAlerta
+    Usuario "1" --> "N" Alerta
+    Usuario "1" --> "N" AcaoAlerta
+```
+
+---
+
 *Desenvolvido como parte da Global Solution 2026/1 — FIAP*
