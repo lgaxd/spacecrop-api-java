@@ -29,7 +29,7 @@ O projeto integra o tema da **Global Solution 2026/1 da FIAP**, que propõe solu
 | Recurso | Link |
 |---|---|
 | 📦 Repositório GitHub | `https://github.com/lgaxd/spacecrop-api-java` |
-| 🎬 Vídeo de Apresentação | *(adicionar link)* |
+| 🎬 Vídeo de Apresentação | `https://www.youtube.com/watch?v=NuVu6FBMNN8` |
 | 🎯 Vídeo Pitch | `https://www.youtube.com/watch?v=gjCMcwhsAEs` |
 | 📖 Documentação Swagger | `http://68.211.88.151:8080/swagger` |
 | 📄 OpenAPI Spec | `http://68.211.88.151:8080/api-docs` |
